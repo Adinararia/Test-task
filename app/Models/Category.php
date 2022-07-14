@@ -28,4 +28,11 @@ class Category extends Model
         return \DB::table($this->table)->select((['id', 'name']))->paginate($number);
         // перепроверить array
     }
+
+    public function selectCategoryWithProducts($id){
+        $return['category'] = Category::findOrFail($id);
+        $return['products'] = $return['category']->products()->get();
+        \Debugbar::addMessage($return);
+        return json_encode($return);
+    }
 }

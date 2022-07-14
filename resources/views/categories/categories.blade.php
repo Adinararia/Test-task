@@ -8,25 +8,18 @@
 
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Категории
-                    </div>
+                    <div class="card-header">Категории</div>
                     <a href="{{route('categories.create')}}" class="btn btn-primary">Добавить категорию</a>
-
-                    {{--                <a href="{{ route('admin.categories.index') }}">asdfasdf </a>--}}
                     <div class="card-body">
-                        {{--                        <ul class="list-group">--}}
-                        {{--                            <a href="#" class="list-group-item active">Категории</a>--}}
-                        {{--                            <a href="#" class="list-group-item">Посты</a>--}}
-                        {{--                            <li>Посты</li>--}}
-                        {{--                        </ul>--}}
                         <ul class="list-group">
                                 @foreach($categories as $category)
-                                <li class="list-group-item"><a>{{$category->name}}</a></li>
+                                <li class="list-group-item"><a href="{{route('categories.show', $category->id)}}">{{$category->name}}</a></li>
                             @endforeach
                         </ul>
-                        {{$categories->links()}}
                     </div>
+                    {{$categories->links()}}
                 </div>
+
             </div>
         </div>
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Category as ModelCategory;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
 
 
-    public function __construct(Category $modelCategory){
+    public function __construct(ModelCategory $modelCategory){
         $this->modelCategory = $modelCategory;
     }
 
@@ -24,7 +24,7 @@ class CategoryController extends Controller
         // заполнить с пагинацией вывод всех категорий
 //        dd(__METHOD__);
         //view all categories with pagination
-      $categories = $this->modelCategory->selectAllCategoryWithPagination(2);
+      $categories = $this->modelCategory->selectAllCategoryWithPagination(5);
       \Debugbar::addMessage($categories);
         return view('categories.categories', compact('categories'));
     }
@@ -54,12 +54,21 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Category  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
-        //
+        $response = $this->modelCategory->selectCategoryWithProducts($id);
+        $return = json_decode($response, true);
+
+
+
+        return view('categories.category')->with([
+            'category' => $return['category'],
+            'products' => $return['products']
+        ]);
+
     }
 
     /**
