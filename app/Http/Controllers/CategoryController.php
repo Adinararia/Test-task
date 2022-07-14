@@ -14,7 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+//        dd(__METHOD__);
+        //view all categories with pagination
+        return view('categories.categories');
     }
 
     /**
