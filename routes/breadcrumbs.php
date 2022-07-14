@@ -9,31 +9,20 @@ use Diglactic\Breadcrumbs\Breadcrumbs;
 //  with `$trail`. This is nice for IDE type checking and completion.
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
-/*!!!!!!!
- *
- * Локальный словарь, не хотел создавать полную структуру перевода для пару слов.
- * Глобальная структура с лэнговыми переменными была бы через структуру resources/lang/{en}/{en}.json
- *
- * !!!!!!
- */
-
 Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
-    $lang['home'] = 'Главная';
-    $trail->push($lang['home'], route('home'));
+    $trail->push(trans('dictionary.home'), route('home'));
 });
 
 // categories
 Breadcrumbs::for('categories', function (BreadcrumbTrail $trail) {
-    $lang['categories'] = 'Категории';
     $trail->parent('home');
-    $trail->push($lang['categories'], route('categories.index'));
+    $trail->push(trans('dictionary.categories'), route('categories.index'));
 });
 
-// Home > Blog > [Category]
+// Home > Categories > [Category]
 Breadcrumbs::for('categories.create', function (BreadcrumbTrail $trail) {
-    $lang['add_category'] = 'Создание категории';
     $trail->parent('categories');
-    $trail->push($lang['add_category'], route('categories.create'));
+    $trail->push(trans('dictionary.add_category'), route('categories.create'));
 });
 
 

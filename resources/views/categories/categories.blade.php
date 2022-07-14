@@ -20,10 +20,11 @@
                         {{--                            <li>Посты</li>--}}
                         {{--                        </ul>--}}
                         <ul class="list-group">
-                            <li class="list-group-item"><a>Категория 1</a></li>
-                            <li class="list-group-item"><a>Категория 2</a></li>
+                                @foreach($categories as $category)
+                                <li class="list-group-item"><a>{{$category->name}}</a></li>
+                            @endforeach
                         </ul>
-
+                        {{$categories->links()}}
                     </div>
                 </div>
             </div>

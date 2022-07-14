@@ -24,4 +24,8 @@ class Category extends Model
             ]
         ));
     }
+    public function selectAllCategoryWithPagination($number){
+        return \DB::table($this->table)->select((['id', 'name']))->paginate($number);
+        // перепроверить array
+    }
 }

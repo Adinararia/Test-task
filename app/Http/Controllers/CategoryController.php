@@ -24,7 +24,9 @@ class CategoryController extends Controller
         // заполнить с пагинацией вывод всех категорий
 //        dd(__METHOD__);
         //view all categories with pagination
-        return view('categories.categories');
+      $categories = $this->modelCategory->selectAllCategoryWithPagination(2);
+      \Debugbar::addMessage($categories);
+        return view('categories.categories', compact('categories'));
     }
 
     /**
