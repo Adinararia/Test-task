@@ -12,8 +12,16 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    public function __construct(Category $modelCategory){
+        $this->modelCategory = $modelCategory;
+    }
+
+
     public function index()
     {
+        // заполнить с пагинацией вывод всех категорий
 //        dd(__METHOD__);
         //view all categories with pagination
         return view('categories.categories');
@@ -26,7 +34,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.add_category');
     }
 
     /**
@@ -37,7 +45,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->modelCategory->createCategory($request['nameCategory']);
+        return redirect()->route('categories.index');
     }
 
     /**

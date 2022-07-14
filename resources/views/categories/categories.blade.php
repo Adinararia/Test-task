@@ -3,11 +3,14 @@
 
 @section('content')
     <div class="container">
+        {{ Breadcrumbs::render('categories') }}
         <div class="row justify-content-center">
+
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Dashboard') }}</div>
-
+                    <div class="card-header">Категории
+                    </div>
+                    <a href="{{route('categories.create')}}" class="btn btn-primary">Добавить категорию</a>
 
                     {{--                <a href="{{ route('admin.categories.index') }}">asdfasdf </a>--}}
                     <div class="card-body">
@@ -19,7 +22,6 @@
                         <ul class="list-group">
                             <li class="list-group-item"><a>Категория 1</a></li>
                             <li class="list-group-item"><a>Категория 2</a></li>
-
                         </ul>
 
                     </div>
