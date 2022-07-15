@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Home')
+@section('title', __('dictionary.categories'))
 
 @section('content')
     <div class="container">
@@ -12,8 +12,14 @@
                     <a href="{{route('categories.create')}}" class="btn btn-primary">Добавить категорию</a>
                     <div class="card-body">
                         <ul class="list-group">
-                                @foreach($categories as $category)
-                                <li class="list-group-item"><a href="{{route('categories.show', $category->id)}}">{{$category->name}}</a></li>
+                            @foreach($categories as $category)
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <a href="{{route('categories.show', $category->id)}}">{{$category->name}}</a>
+                                    <div class="badge bg-primary">
+                                        <a href="{{route('categories.edit', $category->id)}}" class="btn btn-primary">Изменить</a>
+                                        <a href="{{route('categories.destroy', $category->id)}}" class="text-right btn btn-primary">Удалить</a>
+                                    </div>
+                                </li>
                             @endforeach
                         </ul>
                     </div>
@@ -22,10 +28,6 @@
 
             </div>
         </div>
-
-        {{--            <a href="{{route('admin.categories.index')}}">Select Category</a>--}}
-
-        {{--        @include('admin.includes.categoriesHome')--}}
     </div>
 
 @endsection
