@@ -19,13 +19,22 @@ Breadcrumbs::for('categories', function (BreadcrumbTrail $trail) {
     $trail->push(trans('dictionary.categories'), route('categories.index'));
 });
 
-// Home > Categories > [Category]
+// Home > Categories > add category
 Breadcrumbs::for('categories.create', function (BreadcrumbTrail $trail) {
     $trail->parent('categories');
     $trail->push(trans('dictionary.add_category'), route('categories.create'));
 });
 
-
+// Home > Ctagories > [Category]
+Breadcrumbs::for('category', function (BreadcrumbTrail $trail, $category) {
+    $trail->parent('categories');
+    $trail->push($category->name, route('categories.show', $category->id));
+});
+//
+//Breadcrumbs::for('category', function (BreadcrumbTrail $trail, \App\Models\Category $category) {
+//    $trail->parent('categories');
+//    $trail->push($category->name, route('categories.show', $category->id));
+//});
 //
 //Breadcrumbs::for('categories.create', function (BreadcrumbTrail $trail, $category) {
 //    $trail->parent('home');

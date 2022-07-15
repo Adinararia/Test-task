@@ -1,6 +1,41 @@
 @extends('layouts.app')
-@section('title', $category['name'])
+
+@php /** @var \App\Http\Controllers\CategoryController */ @endphp
+
+@section('title', $category->name)
 
 @section('content')
-    {{$category['name']}}
+
+
+    <div class="container">
+        {{ Breadcrumbs::render('category', $category) }}
+        <div class="row justify-content-center">
+
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{$category->name}}</div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            @foreach($products as $product)
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <a href="{{route('categories.show',$product->id)}}">{{$product->name}}</a>
+                                    <span>{{$product->description}}</span>
+                                    <div class="badge bg-primary">
+                                        <a href="{{route('categories.edit', $product->id)}}" class="btn btn-primary">Изменить</a>
+                                        <a href="{{route('categories.destroy', $product->id)}}" class="text-right btn btn-primary">Удалить</a>
+                                    </div>
+                                </li>
+                            @endforeach
+
+                        </ul>
+                    </div>
+{{--                    {{$categories->links()}}--}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
 @endsection

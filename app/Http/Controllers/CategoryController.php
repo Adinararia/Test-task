@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Category as ModelCategory;
 use Illuminate\Http\Request;
 
@@ -24,8 +25,8 @@ class CategoryController extends Controller
         // заполнить с пагинацией вывод всех категорий
 //        dd(__METHOD__);
         //view all categories with pagination
-      $categories = $this->modelCategory->selectAllCategoryWithPagination(5);
-      \Debugbar::addMessage($categories);
+        $categories = $this->modelCategory->selectAllCategoryWithPagination(5);
+        \Debugbar::addMessage($categories);
         return view('categories.categories', compact('categories'));
     }
 
@@ -60,13 +61,10 @@ class CategoryController extends Controller
     public function show($id)
     {
         $response = $this->modelCategory->selectCategoryWithProducts($id);
-        $return = json_decode($response, true);
-
-
 
         return view('categories.category')->with([
-            'category' => $return['category'],
-            'products' => $return['products']
+            'category' => $response['category'],
+            'products' => $response['products']
         ]);
 
     }
@@ -79,7 +77,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        dd(__METHOD__);
     }
 
     /**
@@ -102,6 +100,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-
+        $this->modelCategory->deleteCategory($id);
+        return redirect()->route('categories.index');
     }
 }

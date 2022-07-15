@@ -17,7 +17,13 @@
                                     <a href="{{route('categories.show', $category->id)}}">{{$category->name}}</a>
                                     <div class="badge bg-primary">
                                         <a href="{{route('categories.edit', $category->id)}}" class="btn btn-primary">Изменить</a>
-                                        <a href="{{route('categories.destroy', $category->id)}}" class="text-right btn btn-primary">Удалить</a>
+{{--                                        <a href="{{route('categories.destroy', $category->id)}}" class=" button btn btn-primary">Удалить</a>--}}
+                                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
+                                            @csrf
+{{--                                        <a href="{{ route('categories.destroy',  $category->id)}}" class="text-right btn btn-primary">Удалить</a>--}}
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-primary">Удалить</button>
+                                        </form>
                                     </div>
                                 </li>
                             @endforeach

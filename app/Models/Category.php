@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
 //    use HasFactory;
+        use SoftDeletes;
     protected $table = 'categories';
 
 
@@ -33,6 +35,10 @@ class Category extends Model
         $return['category'] = Category::findOrFail($id);
         $return['products'] = $return['category']->products()->get();
         \Debugbar::addMessage($return);
-        return json_encode($return);
+        return $return;
+    }
+    public function deleteCategory($id){
+        \DB::table($this->getTable())->delete($id);
+        return 0;
     }
 }
