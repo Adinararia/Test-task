@@ -30,6 +30,13 @@ Breadcrumbs::for('category', function (BreadcrumbTrail $trail, $category) {
     $trail->parent('categories');
     $trail->push($category->name, route('categories.show', $category->id));
 });
+
+Breadcrumbs::for('category.edit', function (BreadcrumbTrail $trail, $category) {
+    $trail->parent('categories');
+    $trail->push('Изменить ' . $category->name, route('categories.edit', $category->id));
+});
+
+
 //
 //Breadcrumbs::for('category', function (BreadcrumbTrail $trail, \App\Models\Category $category) {
 //    $trail->parent('categories');

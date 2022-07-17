@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Category as ModelCategory;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -77,19 +78,29 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        dd(__METHOD__);
+        return view('categories.edit_category')->with([
+            'category'=> $category
+        ]);
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Category  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+
+        $validator = $request->validate([
+            'nameCategory' => 'required|unique:categories,name|min:3'
+        ]);
+
+//        Rule::unique('')
+        $this->modelCategory->updateCategory($id,$request->nameCategory);
+        return redirect()->route('categories.index');
     }
 
     /**

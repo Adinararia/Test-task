@@ -15,10 +15,11 @@
                 <div class="card">
                     <div class="card-header">{{$category->name}}</div>
                     <div class="card-body">
+                       @if(!$products->isEmpty())
                         <ul class="list-group">
                             @foreach($products as $product)
                                 <li class="list-group-item d-flex justify-content-between align-items-start">
-                                    <a href="{{route('categories.show',$product->id)}}">{{$product->name}}</a>
+                                    <a href="{{route('categories.show', $product->id)}}">{{$product->name}}</a>
                                     <span>{{$product->description}}</span>
                                     <div class="badge bg-primary">
                                         <a href="{{route('categories.edit', $product->id)}}" class="btn btn-primary">Изменить</a>
@@ -26,10 +27,15 @@
                                     </div>
                                 </li>
                             @endforeach
-
                         </ul>
+                        @else
+                            <span>  Постов в этой категории нет </span>
+                        @endif
                     </div>
-{{--                    {{$categories->links()}}--}}
+                    {{--Доделать пагинацию--}}
+{{--                    @if(!$products->isEmpty())--}}
+                    {{--                    {{$categories->links()}}--}}
+{{--                    @endif--}}
                 </div>
 
             </div>

@@ -41,4 +41,9 @@ class Category extends Model
         \DB::table($this->getTable())->delete($id);
         return 0;
     }
+
+    public function updateCategory($id, $name){
+                \DB::table($this->getTable())->where('id', $id)->update(['name'=> $name]);
+    }
+
 }
