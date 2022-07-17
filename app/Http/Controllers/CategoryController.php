@@ -49,7 +49,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = $request->validate([
+            'nameCategory' => 'required|unique:categories,name|min:3'
+        ]);
         $this->modelCategory->createCategory($request['nameCategory']);
+//        dd($validator);
         return redirect()->route('categories.index');
     }
 
